@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(article_params)
+		@article.user = User.first
 		if @article.save
 			flash[:notice] = "Article was successfully created"
 			redirect_to article_path(@article) # change to articles_opath
@@ -27,7 +28,7 @@ class ArticlesController < ApplicationController
 	def update
 		if @article.update(article_params)
 			flash[:notice] = "Article was successfully updated"
-			redirect_to article_path(@article) # change to articles_opath
+			redirect_to article_path(@article) # change to articles_path
 		else
 			render :edit
 		end
