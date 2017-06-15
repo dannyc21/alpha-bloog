@@ -1,0 +1,27 @@
+ <h1 class="center">Listing all users</h1>
+<p>
+	<%= link_to 'Home', root_path %>
+	<%= link_to 'Create new user', signup_path %>
+</p>
+
+<table>
+	<tr>
+		<th>Username</th>
+		<th>Email</th>
+	</tr>
+
+	<% @users.each do |user| %>
+		<tr>
+			<td style="padding-right:10px;"><%= user.username %></td>
+			<td><%= user.email %></td>
+			<td style="padding-right:10px; padding-left:10px;"><small>Created: <%= time_ago_in_words(user.created_at) %> ago, last updated: <%= time_ago_in_words(user.updated_at) %> ago</small></td>
+			<td style="padding-right:5px;"><%= link_to 'Edit', edit_user_path(user) %></td>
+			<td style="padding-right:5px;"><%= link_to 'Show', user_path(user) %></td>
+			<td><%= link_to 'Delete', user_path(user), method: :delete, data: {confirm: "Are you sure?"} %></td>
+		</tr>
+	<% end %>
+</table>
+
+<% if @users.empty? %>
+	<p style="font-size: 25px;">List is empty</p>
+<% end %>
